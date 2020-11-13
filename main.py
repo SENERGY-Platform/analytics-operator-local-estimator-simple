@@ -80,10 +80,7 @@ def process(inputs: typing.List[Input]):
     eoy = datetime(today.year, 12, 31)
     eom = datetime(today.year, today.month, 1) + relativedelta(months=1)
     eod = datetime(today.year, today.month, today.day) + timedelta(days=1)
-
     value = 0
-    dt = datetime.now()
-    timestamp = dt.replace(tzinfo=timezone.utc).timestamp()
     ts = ""
     message_id = ""
     for inp in inputs:
@@ -93,6 +90,7 @@ def process(inputs: typing.List[Input]):
             ts = inp.current_value
         if inp.name == "message_id" and inp.current_value is not None:
             message_id = inp.current_value
+    timestamp = datetime.strptime(ts, '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=timezone.utc).timestamp()
     lr.train(timestamp, value)
     pred_day = lr.predict(eod.replace(tzinfo=timezone.utc).timestamp())
     pred_month = lr.predict(eom.replace(tzinfo=timezone.utc).timestamp())
