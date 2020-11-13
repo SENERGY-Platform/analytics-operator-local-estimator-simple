@@ -1,0 +1,3 @@
+https://github.com/SENERGY-Platform/analytics-local-lib/archive/main.zip
+numpy
+python-dateutil~=2.8.1
