@@ -1,4 +1,5 @@
 FROM alpine:latest
+LABEL org.opencontainers.image.source https://github.com/SENERGY-Platform/analytics-operator-local-estimator-simple
 
 ADD . /opt/app
 WORKDIR /opt/app
